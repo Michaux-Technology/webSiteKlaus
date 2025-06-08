@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBC Banjo & Brass Connection</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">BBC Banjo & Brass Connection</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#gallery">Galerie</a></li>
+            <li><a href="#concerts">Konzerte</a></li>
+            <li><a href="#members">Mitglieder</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('img/libido.jpg') center/cover;">
+        <div class="hero-content">
+            <h1>BBC Banjo & Brass Connection</h1>
+            <p>Die beste Rockband Deutschlands</p>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <h2>Galerie</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="img/Líbido_band_in_2009.jpg" alt="Libidoband" class="modal-trigger" data-type="image" data-src="img/Líbido_band_in_2009.jpg">
+            </div>
+            <div class="gallery-item">
+                <div class="video-thumb modal-trigger" data-type="video" data-src="https://www.youtube.com/embed/grTGtx5ukUg">
+                    <iframe width="100%" height="300" src="https://www.youtube.com/embed/grTGtx5ukUg" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="border-radius:10px; pointer-events: none;"></iframe>
+                    <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="concerts" class="concerts">
+        <h2>Kommende Konzerte</h2>
+        <div class="concert-list">
+            <div class="concert-item">
+                <h3>15. Juni 2024</h3>
+                <p>Rock am Ring Festival</p>
+                <p>Nürburgring, Deutschland</p>
+            </div>
+            <div class="concert-item">
+                <h3>22. Juli 2024</h3>
+                <p>Wacken Open Air</p>
+                <p>Wacken, Deutschland</p>
+            </div>
+            <div class="concert-item">
+                <h3>5. August 2024</h3>
+                <p>Rock im Park</p>
+                <p>Nürnberg, Deutschland</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="members" class="members">
+        <h2>Unsere Bandmitglieder</h2>
+        <div class="members-grid">
+            <div class="member">
+                <img src="img/chloe.jpg" alt="Sänger">
+                <h3>Max Schmidt</h3>
+                <p>Sänger</p>
+            </div>
+            <div class="member">
+                <img src="img/Lenny2017_0001.jpg" alt="Gitarrist">
+                <h3>Lukas Weber</h3>
+                <p>Lead-Gitarre</p>
+            </div>
+            <div class="member">
+                <img src="img/photo_petit - Copie2.jpg" alt="Bassist">
+                <h3>Thomas Müller</h3>
+                <p>Bass</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Kontakt</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <p><strong>Adresse:</strong><br>
+                An den Birkenfeldern 5<br>
+                07639 Tautenhain</p>
+                <div class="map-container" style="margin: 2rem 0; text-align:center;">
+                    <iframe src="https://www.google.com/maps?q=An+den+Birkenfeldern+5,+07639+Tautenhain&output=embed" width="100%" height="300" style="border:0; border-radius:10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <form class="contact-form">
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="E-Mail" required>
+                <textarea placeholder="Nachricht" required></textarea>
+                <button type="submit">Senden</button>
+            </form>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-spotify"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 BBC Musik Band. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner">
+        <p>Diese Website verwendet Cookies, um Ihr Erlebnis zu verbessern. Durch die Nutzung dieser Seite akzeptieren Sie unsere <a href="#" style="color:#ff4d4d; text-decoration:underline;">Cookie-Richtlinie</a>.</p>
+        <button id="accept-cookies">Akzeptieren</button>
+    </div>
+
+    <!-- Modal pour image/vidéo -->
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content" id="modal-content"></div>
+    </div>
+
+    <script src="modal.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const banner = document.getElementById('cookie-banner');
+            const btn = document.getElementById('accept-cookies');
+            if (localStorage.getItem('cookiesAccepted')) {
+                banner.style.display = 'none';
+            }
+            btn.onclick = function () {
+                localStorage.setItem('cookiesAccepted', 'true');
+                banner.style.display = 'none';
+            };
+        });
+    </script>
+</body>
+</html> 
