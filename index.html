@@ -11,6 +11,9 @@
 <body>
     <nav class="navbar">
         <div class="logo">BBC Banjo & Brass Connection</div>
+        <button class="nav-toggle" aria-label="toggle navigation">
+            <span class="hamburger"></span>
+        </button>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#gallery">Galerie</a></li>
@@ -202,6 +205,7 @@
     <script src="player.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Cookie Banner
             const banner = document.getElementById('cookie-banner');
             const btn = document.getElementById('accept-cookies');
             if (localStorage.getItem('cookiesAccepted')) {
@@ -211,6 +215,24 @@
                 localStorage.setItem('cookiesAccepted', 'true');
                 banner.style.display = 'none';
             };
+
+            // Mobile Navigation
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            const navbar = document.querySelector('.navbar');
+
+            navToggle.addEventListener('click', () => {
+                navbar.classList.toggle('nav-open');
+                navLinks.classList.toggle('active');
+            });
+
+            // Fermer le menu mobile quand on clique sur un lien
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navbar.classList.remove('nav-open');
+                    navLinks.classList.remove('active');
+                });
+            });
         });
     </script>
 </body>
