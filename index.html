@@ -20,10 +20,32 @@
         </ul>
     </nav>
 
+    <div class="audio-player">
+        <audio id="background-music">
+            <source src="img/video1.mp4" type="audio/mp4">
+        </audio>
+        <div class="player-controls">
+            <button id="playPause" class="control-btn">
+                <i class="fas fa-play"></i>
+            </button>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="time">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+            <div class="volume-control">
+                <i class="fas fa-volume-up"></i>
+                <input type="range" id="volume" min="0" max="100" value="100">
+            </div>
+        </div>
+    </div>
+
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>BBC Banjo & Brass Connection</h1>
-            <p>Die beste Brassband Deutschlands</p>
+            <p>Blechmusik mit Banjo</p>
         </div>
     </section>
 
@@ -50,6 +72,24 @@
             </div>
             <div class="gallery-item">
                 <img src="img/Eberhard.PNG" alt="Libidoband" class="modal-trigger" data-type="image" data-src="img/Eberhard.PNG">
+            </div>
+            <div class="gallery-item">
+                <img src="img/img1.jpg" alt="Libidoband" class="modal-trigger" data-type="image" data-src="img/img1.jpg">
+            </div>
+            <div class="gallery-item">
+                <img src="img/img2.jpg" alt="Libidoband" class="modal-trigger" data-type="image" data-src="img/img2.jpg">
+            </div>
+            <div class="gallery-item video-thumb">
+                <img src="img/video1.png" alt="BBC Video 1" class="modal-trigger" data-type="video" data-src="img/video1.mp4">
+                <div class="play-overlay">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+            </div>
+            <div class="gallery-item video-thumb">
+                <img src="img/video2.png" alt="BBC Video 2" class="modal-trigger" data-type="video" data-src="img/video2.mp4">
+                <div class="play-overlay">
+                    <i class="fas fa-play-circle"></i>
+                </div>
             </div>
         </div>
     </section>
@@ -159,6 +199,7 @@
     </div>
 
     <script src="modal.js"></script>
+    <script src="player.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const banner = document.getElementById('cookie-banner');
