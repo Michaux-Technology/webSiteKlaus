@@ -26,10 +26,11 @@ body {
     padding: 15px 25px;
     border-radius: 30px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 400px;
+    width: min(400px, 90%);
     display: flex;
     align-items: center;
     backdrop-filter: blur(10px);
+    margin: 0 auto;
 }
 
 .player-controls {
@@ -380,6 +381,50 @@ body {
     
     .gallery-item {
         padding: 0.8rem;
+    }
+
+    .audio-player {
+        width: 90%;
+        padding: 12px 15px;
+        gap: 10px;
+    }
+
+    .player-controls {
+        gap: 10px;
+    }
+
+    .control-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+    .volume-control {
+        display: none; /* Cacher le contrôle du volume sur mobile pour gagner de l'espace */
+    }
+
+    .time {
+        font-size: 0.7rem;
+        min-width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .audio-player {
+        bottom: 70px;
+        padding: 10px;
+    }
+
+    .control-btn {
+        width: 30px;
+        height: 30px;
+    }
+
+    .control-btn i {
+        font-size: 1rem;
+    }
+
+    .time {
+        min-width: 60px;
     }
 }
 
