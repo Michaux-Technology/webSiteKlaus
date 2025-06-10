@@ -27,17 +27,40 @@
                 }
             }
 
+            // Fonction pour masquer la barre d'URL
+            function hideUrlBar() {
+                // Petit délai pour laisser le temps à l'orientation de se mettre en place
+                setTimeout(function() {
+                    // Défilement d'un pixel pour forcer la disparition de la barre d'URL
+                    window.scrollTo(0, 1);
+                    // Second défilement après une courte pause pour s'assurer que ça fonctionne
+                    setTimeout(function() {
+                        window.scrollTo(0, 0);
+                        window.scrollTo(0, 1);
+                    }, 100);
+                }, 100);
+            }
+
             // Détecter l'orientation et activer le plein écran en mode paysage
             window.addEventListener('orientationchange', function() {
                 if (window.orientation === 90 || window.orientation === -90) {
                     enableFullScreen();
+                    hideUrlBar();
                 }
             });
 
             // Vérifier l'orientation initiale
             if (window.orientation === 90 || window.orientation === -90) {
                 enableFullScreen();
+                hideUrlBar();
             }
+
+            // Gérer également le redimensionnement de la fenêtre
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > window.innerHeight) { // Mode paysage
+                    hideUrlBar();
+                }
+            });
         });
     </script>
 </head>
