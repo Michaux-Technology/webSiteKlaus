@@ -695,7 +695,7 @@ footer {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1024px), (max-width: 1024px) and (orientation: landscape) {
     .navbar {
         padding: 1rem;
     }
@@ -743,16 +743,19 @@ footer {
         font-size: 1.1rem;
     }
 
-    .hero {
-        background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1)),
-                    url('img/img3.jpg') 65% 30%/cover;
-    }
-
     .gallery h2,
     .concerts h2,
     .members h2,
     .contact h2 {
         font-size: 2rem;
+    }
+}
+
+/* Ajustements spécifiques pour les petits écrans */
+@media (max-width: 768px) {
+    .hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1)),
+                    url('img/img3.jpg') 65% 30%/cover;
     }
 }
 
