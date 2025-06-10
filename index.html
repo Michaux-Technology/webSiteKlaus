@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <script>
-        // Script pour gérer le mode plein écran
+        // Script pour gérer le mode plein écran et le défilement
         window.addEventListener('load', function() {
             // Fonction pour passer en plein écran
             function enableFullScreen() {
@@ -27,40 +27,68 @@
                 }
             }
 
-            // Fonction pour masquer la barre d'URL
+            // Fonction pour masquer la barre d'URL avec plusieurs tentatives
             function hideUrlBar() {
-                // Petit délai pour laisser le temps à l'orientation de se mettre en place
+                // Force le scroll immédiatement
+                window.scrollTo(0, 1);
+
+                // Première série de tentatives
                 setTimeout(function() {
-                    // Défilement d'un pixel pour forcer la disparition de la barre d'URL
+                    // Essai avec différentes valeurs de défilement
                     window.scrollTo(0, 1);
-                    // Second défilement après une courte pause pour s'assurer que ça fonctionne
-                    setTimeout(function() {
-                        window.scrollTo(0, 0);
-                        window.scrollTo(0, 1);
-                    }, 100);
+                    window.scrollTo(0, 100);
+                    window.scrollTo(0, 0);
+                    window.scrollTo(0, 1);
+
+                    // Essai avec scrollBy
+                    window.scrollBy(0, 1);
+                    
+                    // Essai avec behavior: smooth
+                    window.scrollTo({
+                        top: 1,
+                        behavior: 'smooth'
+                    });
                 }, 100);
+
+                // Deuxième série de tentatives après un délai plus long
+                setTimeout(function() {
+                    window.scrollTo(0, 1);
+                    window.scrollBy(0, 1);
+                }, 500);
+
+                // Troisième série pour s'assurer que ça fonctionne
+                setTimeout(function() {
+                    window.scrollTo(0, 1);
+                    document.body.scrollTop = 1;
+                    document.documentElement.scrollTop = 1;
+                }, 1000);
             }
 
-            // Détecter l'orientation et activer le plein écran en mode paysage
-            window.addEventListener('orientationchange', function() {
-                if (window.orientation === 90 || window.orientation === -90) {
+            // Fonction pour gérer l'orientation
+            function handleOrientation() {
+                if (window.orientation === 90 || window.orientation === -90 || window.innerWidth > window.innerHeight) {
                     enableFullScreen();
+                    // Appels multiples de hideUrlBar pour plus de fiabilité
                     hideUrlBar();
+                    setTimeout(hideUrlBar, 100);
+                    setTimeout(hideUrlBar, 500);
                 }
-            });
-
-            // Vérifier l'orientation initiale
-            if (window.orientation === 90 || window.orientation === -90) {
-                enableFullScreen();
-                hideUrlBar();
             }
 
-            // Gérer également le redimensionnement de la fenêtre
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > window.innerHeight) { // Mode paysage
+            // Écouteurs d'événements
+            window.addEventListener('orientationchange', handleOrientation);
+            window.addEventListener('resize', handleOrientation);
+            window.addEventListener('scroll', function() {
+                if (window.innerWidth > window.innerHeight) {
                     hideUrlBar();
                 }
             });
+
+            // Vérification initiale
+            handleOrientation();
+
+            // Forcer un petit délai avant la première tentative
+            setTimeout(handleOrientation, 100);
         });
     </script>
 </head>
