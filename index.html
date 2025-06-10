@@ -2,11 +2,44 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>BBC Banjo & Brass Connection</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        // Script pour gérer le mode plein écran
+        window.addEventListener('load', function() {
+            // Fonction pour passer en plein écran
+            function enableFullScreen() {
+                var doc = window.document.documentElement;
+                if (doc.requestFullscreen) {
+                    doc.requestFullscreen();
+                } else if (doc.mozRequestFullScreen) {
+                    doc.mozRequestFullScreen();
+                } else if (doc.webkitRequestFullscreen) {
+                    doc.webkitRequestFullscreen();
+                } else if (doc.msRequestFullscreen) {
+                    doc.msRequestFullscreen();
+                }
+            }
+
+            // Détecter l'orientation et activer le plein écran en mode paysage
+            window.addEventListener('orientationchange', function() {
+                if (window.orientation === 90 || window.orientation === -90) {
+                    enableFullScreen();
+                }
+            });
+
+            // Vérifier l'orientation initiale
+            if (window.orientation === 90 || window.orientation === -90) {
+                enableFullScreen();
+            }
+        });
+    </script>
 </head>
 <body>
     <nav class="navbar">
