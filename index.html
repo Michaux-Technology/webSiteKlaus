@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
     <title>BBC Banjo & Brass Connection</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -13,6 +14,9 @@
     <script>
         // Script pour gérer le mode plein écran
         window.addEventListener('load', function() {
+            let lastScrollPosition = 0;
+            let ticking = false;
+
             // Fonction pour passer en plein écran
             function enableFullScreen() {
                 var doc = window.document.documentElement;
@@ -27,16 +31,31 @@
                 }
             }
 
+            // Fonction pour masquer la barre d'URL
+            function hideUrlBar() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        if (window.scrollY > lastScrollPosition) {
+                            // Défilement vers le bas
+                            document.documentElement.style.setProperty('--nav-top', '-100px');
+                        } else {
+                            // Défilement vers le haut
+                            document.documentElement.style.setProperty('--nav-top', '0px');
+                        }
+                        lastScrollPosition = window.scrollY;
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }
+
             // Fonction pour gérer l'orientation
             function handleOrientation() {
                 if (window.orientation === 90 || window.orientation === -90 || window.innerWidth > window.innerHeight) {
                     enableFullScreen();
-                    // Petit délai avant le défilement
                     setTimeout(function() {
-                        window.scrollTo({
-                            top: 1,
-                            behavior: 'auto'
-                        });
+                        window.scrollTo(0, 1);
+                        hideUrlBar();
                     }, 300);
                 }
             }
@@ -44,11 +63,29 @@
             // Écouteurs d'événements
             window.addEventListener('orientationchange', handleOrientation);
             window.addEventListener('resize', handleOrientation);
+            window.addEventListener('scroll', hideUrlBar);
 
             // Vérification initiale
             handleOrientation();
         });
     </script>
+    <style>
+        :root {
+            --nav-top: 0px;
+        }
+        .navbar {
+            transform: translateY(var(--nav-top));
+            transition: transform 0.3s ease-in-out;
+        }
+        body {
+            overscroll-behavior-y: contain;
+        }
+        @media screen and (orientation: landscape) {
+            body {
+                min-height: calc(100vh + 1px);
+            }
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
