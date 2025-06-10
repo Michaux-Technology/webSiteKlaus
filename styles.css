@@ -236,7 +236,7 @@ body {
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1)),
-                url('img/libido.jpg') center/cover;
+                url('img/img3.jpg') center 30%/cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -741,6 +741,11 @@ footer {
 
     .hero-content p {
         font-size: 1.1rem;
+    }
+
+    .hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1)),
+                    url('img/img3.jpg') 65% 30%/cover;
     }
 
     .gallery h2,
